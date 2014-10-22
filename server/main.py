@@ -2,16 +2,20 @@
 # -*- coding:utf-8 -*-
 
 import json, urllib2
+from datetime import datetime, date
 import cgi, cgitb
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 def application(environ, start_response):
   # Get Request(GET) from app
   query = cgi.parse_qsl(environ.get('QUERY_STRING'))
-  param_dict, ret_dict = {}, {}
+  param_dict, ret_list = {}, []
   for params in query:
     param_dict[params[0]] = params[1]
 
-  start_response("200 OK", [('Content-Type','application/json'), ('charset', 'utf-8')])
+  start_response("200 OK", [('Content-Type','text/html'), ('charset', 'utf-8')])
 
   station_lat, station_lon = get_station_place(param_dict['departure_station'])
   if station_lat == -1:
@@ -24,16 +28,25 @@ def application(environ, start_response):
     return json.dumps({'error':'google api connection error'})
   if distance == -2:
     return json.dumps({'error':'google api json parse error'})
-  ret_dict['distance'] = distance
+  ret_list.append(distance)
 
-  departure_time = get_route(param_dict['departure_station'], param_dict['arrival_station'], param_dict['arrival_time'])
-  if departure_time == -1:
-    return json.dumps({'error':'ekispert route api connection error'})
-  if departure_time == -2:
-    return json.dumps({'error':'ekispert route api json parse error'})
-  ret_dict['departure_time'] = departure_time
+  route_url = get_route_url(param_dict['departure_station'],
+          param_dict['arrival_station'], param_dict['departure_time'])
+  if route_url == -1:
+    return json.dumps({'error':'ekispert light api connection error'})
+  if route_url == -2:
+    return json.dumps({'error':'ekispert light api json parse error'})
+  ret_list.append(route_url)
 
-  return json.dumps(ret_dict)
+  route = get_route(param_dict['departure_station'],
+          param_dict['arrival_station'], param_dict['departure_time'])
+  if route == -1:
+    return json.dumps({'error':'ekispert extreme api connection error'})
+  if route == -2:
+    return json.dumps({'error':'ekispert extreme api json parse error'})
+  ret_list.append(route)
+
+  return ','.join(map(str, ret_list))
 
 def get_station_place(station):
   url = 'http://api.ekispert.com/v1/json/station?key=Eyvxmasfk98nJP6e&name={0}'.format(station)
@@ -65,8 +78,30 @@ def get_distance_to_station(gps_lat, gps_lon, station_lat, station_lon):
   except:
     return -2
 
-def get_route(departure_station, arrival_station, arrival_time):
-  url = 'http://api.ekispert.com/v1/json/search/course/extreme?key=Eyvxmasfk98nJP6e&viaList={0}:{1}&time={2}&searchType=arrival'.format(departure_station, arrival_station, arrival_time)
+def get_route(departure_station, arrival_station, departure_time):
+  url = 'http://api.ekispert.com/v1/json/search/course/extreme?key=Eyvxmasfk98nJP6e&viaList={0}:{1}&time={2}&searchType=departure'.format(departure_station, arrival_station, departure_time)
+  try:
+    req = urllib2.urlopen(url)
+    res = json.loads(req.read())
+    req.close()
+  except:
+    return -1
+
+  course_list = []
+  try:
+    courses = res['ResultSet']['Course']
+    for course in courses:
+      price, line = course['Price'][0]['Oneway'], course['Route']['Line']
+      departure_time = line[0]['DepartureState']['Datetime']['text'][11:16] if (isinstance(line, list)) else line['DepartureState']['Datetime']['text'][11:16]
+      arrival_time = line[-1]['ArrivalState']['Datetime']['text'][11:16] if (isinstance(line, list)) else line['ArrivalState']['Datetime']['text'][11:16]
+      route = '-'.join([point['Station']['Name'] for point in course['Route']['Point']])
+      course_list.append('.'.join([price, departure_time, arrival_time, route]))
+    return ':'.join(course_list)
+  except:
+    return -2
+
+def get_route_url(departure_station, arrival_station, departure_time):
+  url = 'http://api.ekispert.com/v1/json/search/course/light?key=EnDgxDu5SWrS4g7m&from={0}&to={1}&time={2}&searchType=departure'.format(departure_station, arrival_station, departure_time)
   try:
     req = urllib2.urlopen(url)
     res = json.loads(req.read())
@@ -75,8 +110,6 @@ def get_route(departure_station, arrival_station, arrival_time):
     return -1
 
   try:
-    line = res['ResultSet']['Course'][0]['Route']['Line']
-    departure_time = line[0]['DepartureState']['Datetime']['text'] if (isinstance(line, list)) else line['DepartureState']['Datetime']['text']
-    return departure_time[11:16]
+    return res['ResultSet']['ResourceURI']
   except:
     return -2
