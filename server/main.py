@@ -1,10 +1,9 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
 
-import json, urllib2
+import json, urllib2, sys
 from datetime import datetime, date
 import cgi, cgitb
-import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
