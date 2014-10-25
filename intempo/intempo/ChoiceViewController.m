@@ -33,6 +33,13 @@
 - (IBAction)route1Button:(id)sender;
 - (IBAction)route2Button:(id)sender;
 - (IBAction)route3Button:(id)sender;
+- (IBAction)closeButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *route1Time;
+@property (weak, nonatomic) IBOutlet UILabel *route2Time;
+@property (weak, nonatomic) IBOutlet UILabel *route3Time;
+@property (weak, nonatomic) IBOutlet UILabel *route1Detail;
+@property (weak, nonatomic) IBOutlet UILabel *route2Detail;
+@property (weak, nonatomic) IBOutlet UILabel *route3Detail;
 @end
 
 @implementation ChoiceViewController
@@ -48,7 +55,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // ProgresBar
-    [[SVProgressHUD appearance] setHudBackgroundColor:[UIColor blackColor]];
+    [[SVProgressHUD appearance] setHudBackgroundColor:[UIColor colorWithRed:11.0/255.0 green:80.0/255.0 blue:116.0/255.0 alpha:1.0]];
     [[SVProgressHUD appearance] setHudForegroundColor:[UIColor whiteColor]];
     
     // GPS
@@ -67,14 +74,15 @@
     _arrivalField.delegate = self;
     
     step = 60;
+    
+    _route1Button.alpha = 0;
+    _route2Button.alpha = 0;
+    _route3Button.alpha = 0;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    _route1Button.alpha = 0;
-    _route2Button.alpha = 0;
-    _route3Button.alpha = 0;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -91,9 +99,6 @@
 
 //***** form *****//
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    //if (textField == _departureField) {
-    //    [_arrivalField becomeFirstResponder];
-    //}
     [textField resignFirstResponder];
     
     return YES;
@@ -114,6 +119,8 @@
 }
 
 - (IBAction)timeButton:(id)sender {
+    [_departureField resignFirstResponder];
+    [_arrivalField resignFirstResponder];
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     NSString *URL = [[NSString alloc] initWithFormat:
                      @"http://pikashi.tokyo/intempo/getdata?lat=%f&lon=%f&departure_station=%@&arrival_station=%@&departure_time=%d",
@@ -136,9 +143,16 @@
     distance = [resArray[0] intValue];
     routeURL = resArray[1];
     routeArray = [resArray[2] componentsSeparatedByString:@" "];
-    [_route1Button setTitle:routeArray[0] forState:UIControlStateNormal];
-    [_route2Button setTitle:routeArray[1] forState:UIControlStateNormal];
-    [_route3Button setTitle:routeArray[2] forState:UIControlStateNormal];
+    NSArray *route1Array = [routeArray[0] componentsSeparatedByString:@"."];
+    NSArray *route2Array = [routeArray[1] componentsSeparatedByString:@"."];
+    NSArray *route3Array = [routeArray[2] componentsSeparatedByString:@"."];
+    _route1Time.text = [[NSString alloc] initWithFormat:@"%@  →  %@", route1Array[0], route1Array[1]];
+    _route2Time.text = [[NSString alloc] initWithFormat:@"%@  →  %@", route2Array[0], route2Array[1]];
+    _route3Time.text = [[NSString alloc] initWithFormat:@"%@  →  %@", route3Array[0], route3Array[1]];
+    _route1Detail.text = [[NSString alloc] initWithFormat:@"%@ (片道 : %@円)", route1Array[3], route1Array[2]];
+    _route2Detail.text = [[NSString alloc] initWithFormat:@"%@ (片道 : %@円)", route2Array[3], route2Array[2]];
+    _route3Detail.text = [[NSString alloc] initWithFormat:@"%@ (片道 : %@円)", route3Array[3], route3Array[2]];
+    
     _route1Button.alpha = 1;
     _route2Button.alpha = 1;
     _route3Button.alpha = 1;
@@ -190,7 +204,7 @@
     NSLog(@"%@", routeArray[0]);
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     departure = [routeArray[0] substringToIndex:5];
-    departureStation = [[routeArray[0] componentsSeparatedByString:@"."][3] componentsSeparatedByString:@"-"][0];
+    departureStation = [[routeArray[0] componentsSeparatedByString:@"."][3] componentsSeparatedByString:@"→"][1];
     bpm = [self calcTempo:departure];
     timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(segue) userInfo:nil repeats:YES];
 }
@@ -198,7 +212,7 @@
 - (IBAction)route2Button:(id)sender {
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     departure = [routeArray[1] substringToIndex:5];
-    departureStation = [[routeArray[1] componentsSeparatedByString:@"."][3] componentsSeparatedByString:@"-"][0];
+    departureStation = [[routeArray[1] componentsSeparatedByString:@"."][3] componentsSeparatedByString:@"→"][1];
     bpm = [self calcTempo:departure];
     timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(segue) userInfo:nil repeats:YES];
 }
@@ -206,8 +220,16 @@
 - (IBAction)route3Button:(id)sender {
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     departure = [routeArray[2] substringToIndex:5];
-    departureStation = [[routeArray[2] componentsSeparatedByString:@"."][3] componentsSeparatedByString:@"-"][0];
+    departureStation = [[routeArray[2] componentsSeparatedByString:@"."][3] componentsSeparatedByString:@"→"][1];
     bpm = [self calcTempo:departure];
     timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(segue) userInfo:nil repeats:YES];
+}
+
+- (IBAction)closeButton:(id)sender {
+    NSArray *arrayForNavigationViewControllers = [[NSArray alloc] initWithArray:self.navigationController.viewControllers];
+    TopViewController *topViewController = [[TopViewController alloc] init];
+    topViewController = [arrayForNavigationViewControllers objectAtIndex:0];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [SVProgressHUD dismiss];
 }
 @end

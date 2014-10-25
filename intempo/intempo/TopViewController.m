@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *detailImage;
-@property (weak, nonatomic) IBOutlet UILabel *equalLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *tempoImage;
 @property (weak, nonatomic) IBOutlet UILabel *tempoLabel;
 @property (weak, nonatomic) IBOutlet UIButton *detailButton;
 @property (weak, nonatomic) IBOutlet UIImageView *hereImage;
@@ -30,15 +30,22 @@
 @property(nonatomic) AVAudioPlayer *audioPlayer;
 @property (weak, nonatomic) IBOutlet UIButton *musicButton;
 - (IBAction)musicButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *stopView;
+@property (weak, nonatomic) IBOutlet UILabel *restLabel;
+@property (weak, nonatomic) IBOutlet UIButton *finishButton;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
+- (IBAction)playButton:(id)sender;
+- (IBAction)finishButton:(id)sender;
 @end
 
 @implementation TopViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _tempoView.layer.borderWidth = 0.5f;
-    _tempoView.layer.borderColor = [[UIColor whiteColor] CGColor];
-    _tempoView.layer.cornerRadius = 5.0f;
+    _stopView.alpha = 0;
+    _restLabel.alpha = 0;
+    _finishButton.alpha = 0;
+    _playButton.alpha = 0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,7 +62,7 @@
         _detailButton.alpha = 0;
         _tempoView.alpha = 0;
         _tempoLabel.alpha = 0;
-        _equalLabel.alpha = 0;
+        _tempoImage.alpha = 0;
         _hereImage.alpha = 0;
         _hereLabel.alpha = 0;
         _dotLabel.alpha = 0;
@@ -66,7 +73,7 @@
         _jacketView.alpha = 0;
         _musicButton.alpha = 0;
         _titleLabel.alpha = 1;
-        _choiceButton.alpha = 1;
+        [_choiceButton setTitle:@"ROUTING SET" forState:UIControlStateNormal];
         _backgroundView.image = [UIImage imageNamed:@"bg1.png"];
     } else {
         _detailLabel.alpha = 1;
@@ -74,7 +81,7 @@
         _detailButton.alpha = 1;
         _tempoView.alpha = 1;
         _tempoLabel.alpha = 1;
-        _equalLabel.alpha = 1;
+        _tempoImage.alpha = 1;
         _hereImage.alpha = 1;
         _hereLabel.alpha = 1;
         _dotLabel.alpha = 1;
@@ -83,11 +90,11 @@
         _thereLabel.alpha = 1;
         _departureLabel.alpha = 1;
         _jacketView.alpha = 0.8;
-        _musicButton.alpha = 0.8;
+        _musicButton.alpha = 1;
         _titleLabel.alpha = 0;
-        _choiceButton.alpha = 0;
+        [_choiceButton setTitle:@"" forState:UIControlStateNormal];
         _backgroundView.image = [UIImage imageNamed:@"bg2.png"];
-        //_tempoLabel.text = _tempo;
+        _tempoLabel.text = _tempo;
         NSDate *current = [NSDate date];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"HH:mm";
@@ -100,9 +107,11 @@
         NSString *path = [[NSBundle mainBundle] pathForResource:bpm ofType:@"mp3"];
         NSURL *url = [[NSURL alloc] initFileURLWithPath:path];
         NSError *error = nil;
-        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-        [_audioPlayer setDelegate:self];
-        [_audioPlayer play];
+        if (!_audioPlayer.playing){
+            _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+            [_audioPlayer setDelegate:self];
+            [_audioPlayer play];
+        }
     }
 }
 
@@ -133,9 +142,65 @@
 - (IBAction)musicButton:(id)sender {
     if (_audioPlayer.playing){
         [_audioPlayer stop];
+        [UIView animateWithDuration:0.5f
+                              delay:0.0f
+                            options:UIViewAnimationOptionAllowUserInteraction
+                         animations:^(void){
+                             _stopView.alpha = 0.9;
+                             _restLabel.alpha = 1.0;
+                             _finishButton.alpha = 1.0;
+                             _playButton.alpha = 1.0;
+                         }
+                         completion:^(BOOL finished){
+                         }];
+        
     }
-    else{
-        [_audioPlayer play];
-    }
+}
+- (IBAction)playButton:(id)sender {
+    [_audioPlayer play];
+    [UIView animateWithDuration:0.5f
+                          delay:0.0f
+                        options:UIViewAnimationOptionAllowUserInteraction
+                     animations:^(void){
+                         _stopView.alpha = 0;
+                         _restLabel.alpha = 0;
+                         _finishButton.alpha = 0;
+                         _playButton.alpha = 0;
+                     }
+                     completion:^(BOOL finished){
+                     }];
+}
+
+- (IBAction)finishButton:(id)sender {
+    [UIView animateWithDuration:0.5f
+                          delay:0.0f
+                        options:UIViewAnimationOptionAllowUserInteraction
+                     animations:^(void){
+                         _stopView.alpha = 0;
+                         _restLabel.alpha = 0;
+                         _finishButton.alpha = 0;
+                         _playButton.alpha = 0;
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    _detailLabel.alpha = 0;
+    _detailImage.alpha = 0;
+    _detailButton.alpha = 0;
+    _tempoView.alpha = 0;
+    _tempoLabel.alpha = 0;
+    _tempoImage.alpha = 0;
+    _hereImage.alpha = 0;
+    _hereLabel.alpha = 0;
+    _dotLabel.alpha = 0;
+    _currentLabel.alpha = 0;
+    _thereImage.alpha = 0;
+    _thereLabel.alpha = 0;
+    _departureLabel.alpha = 0;
+    _jacketView.alpha = 0;
+    _musicButton.alpha = 0;
+    _titleLabel.alpha = 1;
+    [_choiceButton setTitle:@"ROUTING SET" forState:UIControlStateNormal];
+    _backgroundView.image = [UIImage imageNamed:@"bg1.png"];
+    _tempo = 0;
 }
 @end

@@ -15,6 +15,14 @@
 		720349AD19EA893D00D1E825 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 720349AC19EA893D00D1E825 /* Images.xcassets */; };
 		720349B019EA893D00D1E825 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 720349AE19EA893D00D1E825 /* LaunchScreen.xib */; };
 		720349BC19EA893E00D1E825 /* intempoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 720349BB19EA893E00D1E825 /* intempoTests.m */; };
+		720C139319FB4B9E007390BC /* btn_finish.png in Resources */ = {isa = PBXBuildFile; fileRef = 720C138B19FB4B9E007390BC /* btn_finish.png */; };
+		720C139419FB4B9E007390BC /* icon_disclose.png in Resources */ = {isa = PBXBuildFile; fileRef = 720C138C19FB4B9E007390BC /* icon_disclose.png */; };
+		720C139519FB4B9E007390BC /* icon_list.png in Resources */ = {isa = PBXBuildFile; fileRef = 720C138D19FB4B9E007390BC /* icon_list.png */; };
+		720C139619FB4B9E007390BC /* icon_start.png in Resources */ = {isa = PBXBuildFile; fileRef = 720C138E19FB4B9E007390BC /* icon_start.png */; };
+		720C139719FB4B9E007390BC /* icon_stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 720C138F19FB4B9E007390BC /* icon_stop.png */; };
+		720C139819FB4B9E007390BC /* icon_tempo_full.png in Resources */ = {isa = PBXBuildFile; fileRef = 720C139019FB4B9E007390BC /* icon_tempo_full.png */; };
+		720C139919FB4B9E007390BC /* tempobar.png in Resources */ = {isa = PBXBuildFile; fileRef = 720C139119FB4B9E007390BC /* tempobar.png */; };
+		720C139A19FB4B9E007390BC /* textfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 720C139219FB4B9E007390BC /* textfield.png */; };
 		7238B79519F26B03009EB03B /* ChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7238B79419F26B03009EB03B /* ChoiceViewController.m */; };
 		7238B79819F26B46009EB03B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7238B79719F26B46009EB03B /* WebViewController.m */; };
 		727415E919F7DAEC009B5E06 /* bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = 727415E319F7DAEC009B5E06 /* bg1.png */; };
@@ -64,6 +72,14 @@
 		720349B519EA893E00D1E825 /* intempoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = intempoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		720349BA19EA893E00D1E825 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		720349BB19EA893E00D1E825 /* intempoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = intempoTests.m; sourceTree = "<group>"; };
+		720C138B19FB4B9E007390BC /* btn_finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_finish.png; sourceTree = "<group>"; };
+		720C138C19FB4B9E007390BC /* icon_disclose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_disclose.png; sourceTree = "<group>"; };
+		720C138D19FB4B9E007390BC /* icon_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_list.png; sourceTree = "<group>"; };
+		720C138E19FB4B9E007390BC /* icon_start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_start.png; sourceTree = "<group>"; };
+		720C138F19FB4B9E007390BC /* icon_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_stop.png; sourceTree = "<group>"; };
+		720C139019FB4B9E007390BC /* icon_tempo_full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_tempo_full.png; sourceTree = "<group>"; };
+		720C139119FB4B9E007390BC /* tempobar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tempobar.png; sourceTree = "<group>"; };
+		720C139219FB4B9E007390BC /* textfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textfield.png; sourceTree = "<group>"; };
 		7238B79319F26B03009EB03B /* ChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceViewController.h; sourceTree = "<group>"; };
 		7238B79419F26B03009EB03B /* ChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceViewController.m; sourceTree = "<group>"; };
 		7238B79619F26B46009EB03B /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
@@ -182,6 +198,14 @@
 		727415E219F7DAEC009B5E06 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				720C138B19FB4B9E007390BC /* btn_finish.png */,
+				720C138C19FB4B9E007390BC /* icon_disclose.png */,
+				720C138D19FB4B9E007390BC /* icon_list.png */,
+				720C138E19FB4B9E007390BC /* icon_start.png */,
+				720C138F19FB4B9E007390BC /* icon_stop.png */,
+				720C139019FB4B9E007390BC /* icon_tempo_full.png */,
+				720C139119FB4B9E007390BC /* tempobar.png */,
+				720C139219FB4B9E007390BC /* textfield.png */,
 				7274160619F813FC009B5E06 /* assets */,
 				727415EF19F7FD0B009B5E06 /* musics */,
 				727415E319F7DAEC009B5E06 /* bg1.png */,
@@ -323,17 +347,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				7274160119F81128009B5E06 /* 80.mp3 in Resources */,
+				720C139919FB4B9E007390BC /* tempobar.png in Resources */,
 				7274160219F81128009B5E06 /* 90.mp3 in Resources */,
 				7274160F19F813FC009B5E06 /* 170.jpg in Resources */,
 				7274160319F81128009B5E06 /* 100.mp3 in Resources */,
 				727415EB19F7DAEC009B5E06 /* icon_here.png in Resources */,
 				727415EE19F7DAEC009B5E06 /* icon_there.png in Resources */,
 				727415E919F7DAEC009B5E06 /* bg1.png in Resources */,
+				720C139619FB4B9E007390BC /* icon_start.png in Resources */,
 				7274161019F813FC009B5E06 /* 40.jpg in Resources */,
+				720C139819FB4B9E007390BC /* icon_tempo_full.png in Resources */,
+				720C139419FB4B9E007390BC /* icon_disclose.png in Resources */,
 				7274160D19F813FC009B5E06 /* 100.jpg in Resources */,
+				720C139A19FB4B9E007390BC /* textfield.png in Resources */,
 				720349AB19EA893D00D1E825 /* Main.storyboard in Resources */,
 				7274161219F813FC009B5E06 /* 90.jpg in Resources */,
 				7274161119F813FC009B5E06 /* 80.jpg in Resources */,
+				720C139719FB4B9E007390BC /* icon_stop.png in Resources */,
+				720C139519FB4B9E007390BC /* icon_list.png in Resources */,
 				720349B019EA893D00D1E825 /* LaunchScreen.xib in Resources */,
 				7274160E19F813FC009B5E06 /* 120.jpg in Resources */,
 				727415EA19F7DAEC009B5E06 /* bg2.png in Resources */,
@@ -341,6 +372,7 @@
 				727415EC19F7DAEC009B5E06 /* icon_root.png in Resources */,
 				7274160519F81128009B5E06 /* 170.mp3 in Resources */,
 				727415ED19F7DAEC009B5E06 /* icon_tempo.png in Resources */,
+				720C139319FB4B9E007390BC /* btn_finish.png in Resources */,
 				720349AD19EA893D00D1E825 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
