@@ -9,6 +9,9 @@
 #import "TopViewController.h"
 
 @interface TopViewController ()
+{
+    UIImageView *tempoAnimationBar;
+}
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet UIButton *choiceButton;
 @property (weak, nonatomic) IBOutlet UIView *tempoView;
@@ -36,6 +39,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 - (IBAction)playButton:(id)sender;
 - (IBAction)finishButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *tempoGradBar;
+@property (weak, nonatomic) IBOutlet UIView *tempoBar;
 @end
 
 @implementation TopViewController
@@ -46,6 +51,10 @@
     _restLabel.alpha = 0;
     _finishButton.alpha = 0;
     _playButton.alpha = 0;
+    UIImage *tempoGBar = [UIImage imageNamed:@"tempobar.png"];
+    tempoAnimationBar = [[UIImageView alloc]initWithImage:tempoGBar];
+    tempoAnimationBar.frame = CGRectMake(-320, 0, 320, 5);
+    [self.view addSubview:tempoAnimationBar];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,9 +82,12 @@
         _jacketView.alpha = 0;
         _musicButton.alpha = 0;
         _titleLabel.alpha = 1;
+        _tempoBar.alpha = 0;
+        _tempoGradBar.alpha = 1;
         [_choiceButton setTitle:@"ROUTING SET" forState:UIControlStateNormal];
         _backgroundView.image = [UIImage imageNamed:@"bg1.png"];
     } else {
+        _tempo = @"80";
         _detailLabel.alpha = 1;
         _detailImage.alpha = 1;
         _detailButton.alpha = 1;
@@ -92,6 +104,8 @@
         _jacketView.alpha = 0.8;
         _musicButton.alpha = 1;
         _titleLabel.alpha = 0;
+        _tempoBar.alpha = 1;
+        _tempoGradBar.alpha = 0;
         [_choiceButton setTitle:@"" forState:UIControlStateNormal];
         _backgroundView.image = [UIImage imageNamed:@"bg2.png"];
         _tempoLabel.text = _tempo;
@@ -112,8 +126,26 @@
             [_audioPlayer setDelegate:self];
             [_audioPlayer play];
         }
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDelegate:self];
+        //[UIView setAnimationDuration:[_tempo intValue]/60.0f];
+        [UIView setAnimationDuration:1.33];
+        [UIView setAnimationRepeatCount:10000];
+        [UIView setAnimationRepeatAutoreverses:NO];
+        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+        tempoAnimationBar.frame = CGRectMake(320, 0, 320, 5);
+        [UIView commitAnimations];
     }
 }
+
+- (void)animationDidStop:(NSString *)animationID
+                finished:(NSNumber *)finished
+                 context:(void *)context
+{
+
+}
+
 
 -(NSString *)getMusic:(NSInteger)tempo
 {
@@ -150,6 +182,7 @@
                              _restLabel.alpha = 1.0;
                              _finishButton.alpha = 1.0;
                              _playButton.alpha = 1.0;
+                             tempoAnimationBar.alpha = 0;
                          }
                          completion:^(BOOL finished){
                          }];
@@ -166,6 +199,7 @@
                          _restLabel.alpha = 0;
                          _finishButton.alpha = 0;
                          _playButton.alpha = 0;
+                         tempoAnimationBar.alpha = 1;
                      }
                      completion:^(BOOL finished){
                      }];
@@ -180,6 +214,7 @@
                          _restLabel.alpha = 0;
                          _finishButton.alpha = 0;
                          _playButton.alpha = 0;
+                         tempoAnimationBar.alpha = 0;
                      }
                      completion:^(BOOL finished){
                      }];

@@ -123,9 +123,8 @@
     [_arrivalField resignFirstResponder];
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     NSString *URL = [[NSString alloc] initWithFormat:
-                     @"http://pikashi.tokyo/intempo/getdata?lat=%f&lon=%f&departure_station=%@&arrival_station=%@&departure_time=%d",
-                     //lat, lon, _departureField.text, _arrivalField.text, 2300];
-                     lat, lon, @"練馬", @"六本木", 2020];
+                     @"http://pikashi.tokyo/intempo/getdata?lat=%f&lon=%f&departure_station=%@&arrival_station=%@",
+                     lat, lon, _departureField.text, _arrivalField.text];
     URL = [URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [manager GET:URL parameters:nil success:^(NSURLSessionDataTask *task, NSString *response) {
         [self parseJson:response.description];
@@ -201,7 +200,6 @@
 }
 
 - (IBAction)route1Button:(id)sender {
-    NSLog(@"%@", routeArray[0]);
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     departure = [routeArray[0] substringToIndex:5];
     departureStation = [[routeArray[0] componentsSeparatedByString:@"."][3] componentsSeparatedByString:@"→"][1];
