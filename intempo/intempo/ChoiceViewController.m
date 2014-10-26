@@ -124,17 +124,19 @@
     _notFoundLabel.alpha = 0;
     [_departureField resignFirstResponder];
     [_arrivalField resignFirstResponder];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-    NSString *URL = [[NSString alloc] initWithFormat:
-                     @"http://pikashi.tokyo/intempo/getdata?lat=%f&lon=%f&departure_station=%@&arrival_station=%@",
-                     lat, lon, _departureField.text, _arrivalField.text];
-    URL = [URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [manager GET:URL parameters:nil success:^(NSURLSessionDataTask *task, NSString *response) {
-        [self parseJson:response.description];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
-        NSLog(@"failure: %ld", (long)response.statusCode);
-    }];
+    if (![_departureField.text length] && ![_arrivalField.text length]) {
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+        NSString *URL = [[NSString alloc] initWithFormat:
+                         @"http://pikashi.tokyo/intempo/getdata?lat=%f&lon=%f&departure_station=%@&arrival_station=%@",
+                         lat, lon, _departureField.text, _arrivalField.text];
+        URL = [URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [manager GET:URL parameters:nil success:^(NSURLSessionDataTask *task, NSString *response) {
+            [self parseJson:response.description];
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+            NSLog(@"failure: %ld", (long)response.statusCode);
+        }];
+    }
 }
 
 -(void)parseJson:(NSString *)response

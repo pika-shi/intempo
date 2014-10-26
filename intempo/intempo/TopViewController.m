@@ -45,6 +45,10 @@
 - (IBAction)finishButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *tempoGradBar;
 @property (weak, nonatomic) IBOutlet UIView *tempoBar;
+@property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *albumNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *artistImage;
+@property (weak, nonatomic) IBOutlet UIImageView *musicListButton;
 @end
 
 @implementation TopViewController
@@ -96,6 +100,10 @@
         _titleLabel.alpha = 1;
         _tempoBar.alpha = 0;
         _tempoGradBar.alpha = 1;
+        _artistImage.alpha = 0;
+        _artistNameLabel.alpha = 0;
+        _albumNameLabel.alpha = 0;
+        _musicListButton.alpha = 1;
         [_choiceButton setTitle:@"ROUTING SET" forState:UIControlStateNormal];
         _backgroundView.image = [UIImage imageNamed:@"bg1.png"];
     } else {
@@ -117,6 +125,10 @@
         _titleLabel.alpha = 0;
         _tempoBar.alpha = 1;
         _tempoGradBar.alpha = 0;
+        _artistImage.alpha = 1;
+        _artistNameLabel.alpha = 1;
+        _albumNameLabel.alpha = 1;
+        _musicListButton.alpha = 0;
         [_choiceButton setTitle:@"" forState:UIControlStateNormal];
         _backgroundView.image = [UIImage imageNamed:@"bg2.png"];
         _tempoLabel.text = _tempo;
@@ -127,6 +139,9 @@
         _thereLabel.text = [[NSString alloc] initWithFormat:@"%@駅", _departureStation];
         NSString* bpm = [self getMusic:[_tempo intValue]];
         _jacketView.image = [UIImage imageNamed:[[NSString alloc] initWithFormat:@"%@.jpg", bpm]];
+        _artistImage.image = [UIImage imageNamed:[[NSString alloc] initWithFormat:@"%@.png", bpm]];
+        _artistImage.layer.cornerRadius = 25.0f;
+        _artistImage.clipsToBounds = YES;
         NSString *path = [[NSBundle mainBundle] pathForResource:bpm ofType:@"mp3"];
         NSURL *url = [[NSURL alloc] initFileURLWithPath:path];
         NSError *error = nil;
@@ -166,14 +181,24 @@
     NSInteger bpm;
     if (tempo <= 85) {
         bpm = 80;
+        _artistNameLabel.text = @"いきものがかり";
+        _albumNameLabel.text = @"歩いていこう";
     } else if (tempo <= 95) {
         bpm = 90;
+        _artistNameLabel.text = @"ASIAN KUNG-FU GENERATION";
+        _albumNameLabel.text = @"リライト";
     } else if (tempo <= 110) {
         bpm = 100;
+        _artistNameLabel.text = @"Are you Gonna Be My Girl";
+        _albumNameLabel.text = @"JET";
     } else if (tempo <= 145) {
         bpm = 120;
+        _artistNameLabel.text = @"ゆず";
+        _albumNameLabel.text = @"夏色";
     } else {
         bpm = 170;
+        _artistNameLabel.text = @"AKB48";
+        _albumNameLabel.text = @"ヘビーローテション";
     }
     return [[NSString alloc] initWithFormat:@"%ld", (long)bpm];
 }
