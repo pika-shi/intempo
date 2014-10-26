@@ -18,5 +18,6 @@
 @property (nonatomic, strong) NSString *departureStation;
 @property (nonatomic, strong) NSString *tempo;
 @property (nonatomic, strong) NSString *routeURL;
+@property (nonatomic, strong) NSString *play;
 @end
 

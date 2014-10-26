@@ -194,6 +194,7 @@
     topViewController.routeURL = routeURL;
     topViewController.departureTime = departure;
     topViewController.departureStation = departureStation;
+    topViewController.play = @"Y";
     [self.navigationController popToRootViewControllerAnimated:YES];
     [SVProgressHUD dismiss];
     [timer invalidate];

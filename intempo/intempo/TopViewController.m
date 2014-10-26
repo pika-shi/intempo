@@ -11,6 +11,10 @@
 @interface TopViewController ()
 {
     UIImageView *tempoAnimationBar;
+    NSDate *current;
+    NSDateFormatter *formatter;
+    NSString *currentStr;
+    NSTimer *timer;
 }
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet UIButton *choiceButton;
@@ -54,11 +58,20 @@
     UIImage *tempoGBar = [UIImage imageNamed:@"tempobar.png"];
     tempoAnimationBar = [[UIImageView alloc]initWithImage:tempoGBar];
     [self.view addSubview:tempoAnimationBar];
+    formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"HH:mm";
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [timer invalidate];
+    timer = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -107,10 +120,8 @@
         [_choiceButton setTitle:@"" forState:UIControlStateNormal];
         _backgroundView.image = [UIImage imageNamed:@"bg2.png"];
         _tempoLabel.text = _tempo;
-        NSDate *current = [NSDate date];
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"HH:mm";
-        NSString *currentStr = [formatter stringFromDate:current];
+        current = [NSDate date];
+        currentStr = [formatter stringFromDate:current];
         _currentLabel.text = currentStr;
         _departureLabel.text = _departureTime;
         _thereLabel.text = [[NSString alloc] initWithFormat:@"%@駅", _departureStation];
@@ -119,10 +130,11 @@
         NSString *path = [[NSBundle mainBundle] pathForResource:bpm ofType:@"mp3"];
         NSURL *url = [[NSURL alloc] initFileURLWithPath:path];
         NSError *error = nil;
-        if (!_audioPlayer.playing){
+        if ([_play  isEqual: @"Y"]){
             _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
             [_audioPlayer setDelegate:self];
             [_audioPlayer play];
+            _play = @"N";
         }
         
         tempoAnimationBar.alpha = 1;
@@ -132,19 +144,22 @@
         [UIView setAnimationDuration:60.0f/[_tempo intValue]];
         [UIView setAnimationRepeatCount:10000];
         [UIView setAnimationRepeatAutoreverses:NO];
-        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
         tempoAnimationBar.frame = CGRectMake(320, 0, 320, 5);
         [UIView commitAnimations];
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:(1.0)
+                                                 target:self
+                                               selector:@selector(onTimer:)
+                                               userInfo:nil
+                                                repeats:YES];
     }
 }
 
-- (void)animationDidStop:(NSString *)animationID
-                finished:(NSNumber *)finished
-                 context:(void *)context
-{
-
+-(void)onTimer:(NSTimer*)timer {
+    current = [NSDate date];
+    currentStr = [formatter stringFromDate:current];
+    _currentLabel.text = currentStr;
 }
-
 
 -(NSString *)getMusic:(NSInteger)tempo
 {
@@ -178,7 +193,7 @@
                             options:UIViewAnimationOptionAllowUserInteraction
                          animations:^(void){
                              _stopView.alpha = 0.9;
-                             _restLabel.alpha = 1.0;
+                             //_restLabel.alpha = 1.0;
                              _finishButton.alpha = 1.0;
                              _playButton.alpha = 1.0;
                              tempoAnimationBar.alpha = 0;
