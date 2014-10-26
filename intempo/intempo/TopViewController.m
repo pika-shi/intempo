@@ -9,6 +9,13 @@
 #import "TopViewController.h"
 
 @interface TopViewController ()
+{
+    UIImageView *tempoAnimationBar;
+    NSDate *current;
+    NSDateFormatter *formatter;
+    NSString *currentStr;
+    NSTimer *timer;
+}
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet UIButton *choiceButton;
 @property (weak, nonatomic) IBOutlet UIView *tempoView;
@@ -36,6 +43,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 - (IBAction)playButton:(id)sender;
 - (IBAction)finishButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *tempoGradBar;
+@property (weak, nonatomic) IBOutlet UIView *tempoBar;
 @end
 
 @implementation TopViewController
@@ -46,11 +55,23 @@
     _restLabel.alpha = 0;
     _finishButton.alpha = 0;
     _playButton.alpha = 0;
+    UIImage *tempoGBar = [UIImage imageNamed:@"tempobar.png"];
+    tempoAnimationBar = [[UIImageView alloc]initWithImage:tempoGBar];
+    [self.view addSubview:tempoAnimationBar];
+    formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"HH:mm";
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [timer invalidate];
+    timer = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -73,6 +94,8 @@
         _jacketView.alpha = 0;
         _musicButton.alpha = 0;
         _titleLabel.alpha = 1;
+        _tempoBar.alpha = 0;
+        _tempoGradBar.alpha = 1;
         [_choiceButton setTitle:@"ROUTING SET" forState:UIControlStateNormal];
         _backgroundView.image = [UIImage imageNamed:@"bg1.png"];
     } else {
@@ -92,13 +115,13 @@
         _jacketView.alpha = 0.8;
         _musicButton.alpha = 1;
         _titleLabel.alpha = 0;
+        _tempoBar.alpha = 1;
+        _tempoGradBar.alpha = 0;
         [_choiceButton setTitle:@"" forState:UIControlStateNormal];
         _backgroundView.image = [UIImage imageNamed:@"bg2.png"];
         _tempoLabel.text = _tempo;
-        NSDate *current = [NSDate date];
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"HH:mm";
-        NSString *currentStr = [formatter stringFromDate:current];
+        current = [NSDate date];
+        currentStr = [formatter stringFromDate:current];
         _currentLabel.text = currentStr;
         _departureLabel.text = _departureTime;
         _thereLabel.text = [[NSString alloc] initWithFormat:@"%@駅", _departureStation];
@@ -107,12 +130,35 @@
         NSString *path = [[NSBundle mainBundle] pathForResource:bpm ofType:@"mp3"];
         NSURL *url = [[NSURL alloc] initFileURLWithPath:path];
         NSError *error = nil;
-        if (!_audioPlayer.playing){
+        if ([_play  isEqual: @"Y"]){
             _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
             [_audioPlayer setDelegate:self];
             [_audioPlayer play];
+            _play = @"N";
         }
+        
+        tempoAnimationBar.alpha = 1;
+        tempoAnimationBar.frame = CGRectMake(-320, 0, 320, 5);
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDuration:60.0f/[_tempo intValue]];
+        [UIView setAnimationRepeatCount:10000];
+        [UIView setAnimationRepeatAutoreverses:NO];
+        tempoAnimationBar.frame = CGRectMake(320, 0, 320, 5);
+        [UIView commitAnimations];
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:(1.0)
+                                                 target:self
+                                               selector:@selector(onTimer:)
+                                               userInfo:nil
+                                                repeats:YES];
     }
+}
+
+-(void)onTimer:(NSTimer*)timer {
+    current = [NSDate date];
+    currentStr = [formatter stringFromDate:current];
+    _currentLabel.text = currentStr;
 }
 
 -(NSString *)getMusic:(NSInteger)tempo
@@ -147,9 +193,10 @@
                             options:UIViewAnimationOptionAllowUserInteraction
                          animations:^(void){
                              _stopView.alpha = 0.9;
-                             _restLabel.alpha = 1.0;
+                             //_restLabel.alpha = 1.0;
                              _finishButton.alpha = 1.0;
                              _playButton.alpha = 1.0;
+                             tempoAnimationBar.alpha = 0;
                          }
                          completion:^(BOOL finished){
                          }];
@@ -166,6 +213,7 @@
                          _restLabel.alpha = 0;
                          _finishButton.alpha = 0;
                          _playButton.alpha = 0;
+                         tempoAnimationBar.alpha = 1;
                      }
                      completion:^(BOOL finished){
                      }];

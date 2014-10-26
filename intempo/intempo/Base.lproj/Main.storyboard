@@ -57,14 +57,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.094117647058823528" green="0.098039215686274508" blue="0.11372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                 <variation key="heightClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                    <rect key="frame" x="12" y="424" width="296" height="1"/>
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQh-eB-pTG">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.094117647060000004" green="0.098039215690000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <variation key="heightClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                    <rect key="frame" x="12" y="515" width="296" height="1"/>
                                 </variation>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_root.png" translatesAutoresizingMaskIntoConstraints="NO" id="MPa-Qp-luN">
@@ -187,6 +187,19 @@
                                     <action selector="musicButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="wRv-f9-zVN"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANv-FY-g4c">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.094117647060000004" green="0.43137254899999999" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="5"/>
+                                </variation>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tempobar.png" translatesAutoresizingMaskIntoConstraints="NO" id="Yhw-Za-P6Z">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="5"/>
+                                </variation>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s3M-Ec-crO">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
@@ -297,6 +310,8 @@
                                 <exclude reference="awN-iH-aQd"/>
                                 <exclude reference="h76-DC-DfI"/>
                                 <exclude reference="gCj-xV-FDe"/>
+                                <exclude reference="ANv-FY-g4c"/>
+                                <exclude reference="Yhw-Za-P6Z"/>
                                 <exclude reference="s3M-Ec-crO"/>
                                 <exclude reference="gik-lD-eAH"/>
                             </mask>
@@ -320,6 +335,8 @@
                                 <include reference="awN-iH-aQd"/>
                                 <include reference="h76-DC-DfI"/>
                                 <include reference="gCj-xV-FDe"/>
+                                <include reference="ANv-FY-g4c"/>
+                                <include reference="Yhw-Za-P6Z"/>
                                 <include reference="s3M-Ec-crO"/>
                                 <include reference="gik-lD-eAH"/>
                             </mask>
@@ -354,6 +371,8 @@
                         <outlet property="playButton" destination="yZR-Jg-B64" id="hmY-Mg-33n"/>
                         <outlet property="restLabel" destination="vDA-kt-iml" id="xE7-Jl-dgT"/>
                         <outlet property="stopView" destination="gik-lD-eAH" id="EzB-sf-bf4"/>
+                        <outlet property="tempoBar" destination="ANv-FY-g4c" id="jYO-sE-f91"/>
+                        <outlet property="tempoGradBar" destination="Yhw-Za-P6Z" id="aqn-6Y-tAP"/>
                         <outlet property="tempoImage" destination="PyC-HL-Zcx" id="2X3-UA-m0C"/>
                         <outlet property="tempoLabel" destination="5En-t0-p7r" id="Eiu-rB-1g5"/>
                         <outlet property="tempoView" destination="s3M-Ec-crO" id="iyU-7n-46o"/>
@@ -453,7 +472,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <color key="backgroundColor" red="0.094117647060000004" green="0.098039215690000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <variation key="heightClass=regular" fixedFrame="YES">
-                                            <rect key="frame" x="14" y="295" width="296" height="1"/>
+                                            <rect key="frame" x="12" y="295" width="296" height="1"/>
                                         </variation>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jy9-rO-kRT">
@@ -542,6 +561,15 @@
                                             <action selector="timeButton:" destination="Vb5-XF-GhC" eventType="touchUpInside" id="9rH-cR-YMI"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="検索結果はありませんでした" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoM-qU-ayI">
+                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular" fixedFrame="YES">
+                                            <rect key="frame" x="43" y="409" width="238" height="21"/>
+                                        </variation>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.054901960784313725" green="0.062745098039215685" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                 <variation key="default">
@@ -562,6 +590,7 @@
                                         <exclude reference="dfx-Wh-FV6"/>
                                         <exclude reference="FU6-iF-z07"/>
                                         <exclude reference="Cp6-IS-W5u"/>
+                                        <exclude reference="BoM-qU-ayI"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular" fixedFrame="YES">
@@ -583,6 +612,7 @@
                                         <include reference="dfx-Wh-FV6"/>
                                         <include reference="FU6-iF-z07"/>
                                         <include reference="Cp6-IS-W5u"/>
+                                        <include reference="BoM-qU-ayI"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -604,6 +634,7 @@
                     <connections>
                         <outlet property="arrivalField" destination="KuQ-NA-llX" id="3Zt-2E-4NM"/>
                         <outlet property="departureField" destination="Y57-0Q-IVm" id="GsQ-Ao-CoH"/>
+                        <outlet property="notFoundLabel" destination="BoM-qU-ayI" id="gJz-Sy-0NL"/>
                         <outlet property="route1Button" destination="tEx-To-YlG" id="ZR2-IV-S1e"/>
                         <outlet property="route1Detail" destination="Och-Cc-XbQ" id="HE0-J0-K4K"/>
                         <outlet property="route1Time" destination="jy9-rO-kRT" id="9bs-Yb-mR7"/>
@@ -671,6 +702,7 @@
         <image name="icon_start.png" width="180" height="180"/>
         <image name="icon_tempo_full.png" width="155" height="60"/>
         <image name="icon_there.png" width="25" height="24"/>
+        <image name="tempobar.png" width="640" height="10"/>
         <image name="textfield.png" width="560" height="100"/>
     </resources>
 </document>
