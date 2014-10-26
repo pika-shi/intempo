@@ -53,7 +53,6 @@
     _playButton.alpha = 0;
     UIImage *tempoGBar = [UIImage imageNamed:@"tempobar.png"];
     tempoAnimationBar = [[UIImageView alloc]initWithImage:tempoGBar];
-    tempoAnimationBar.frame = CGRectMake(-320, 0, 320, 5);
     [self.view addSubview:tempoAnimationBar];
 }
 
@@ -87,7 +86,6 @@
         [_choiceButton setTitle:@"ROUTING SET" forState:UIControlStateNormal];
         _backgroundView.image = [UIImage imageNamed:@"bg1.png"];
     } else {
-        _tempo = @"80";
         _detailLabel.alpha = 1;
         _detailImage.alpha = 1;
         _detailButton.alpha = 1;
@@ -127,10 +125,11 @@
             [_audioPlayer play];
         }
         
+        tempoAnimationBar.alpha = 1;
+        tempoAnimationBar.frame = CGRectMake(-320, 0, 320, 5);
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDelegate:self];
-        //[UIView setAnimationDuration:[_tempo intValue]/60.0f];
-        [UIView setAnimationDuration:1.33];
+        [UIView setAnimationDuration:60.0f/[_tempo intValue]];
         [UIView setAnimationRepeatCount:10000];
         [UIView setAnimationRepeatAutoreverses:NO];
         [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
@@ -214,7 +213,6 @@
                          _restLabel.alpha = 0;
                          _finishButton.alpha = 0;
                          _playButton.alpha = 0;
-                         tempoAnimationBar.alpha = 0;
                      }
                      completion:^(BOOL finished){
                      }];
