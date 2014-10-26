@@ -40,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *route1Detail;
 @property (weak, nonatomic) IBOutlet UILabel *route2Detail;
 @property (weak, nonatomic) IBOutlet UILabel *route3Detail;
+@property (weak, nonatomic) IBOutlet UILabel *notFoundLabel;
 @end
 
 @implementation ChoiceViewController
@@ -83,6 +84,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    _notFoundLabel.alpha = 0;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -119,6 +121,7 @@
 }
 
 - (IBAction)timeButton:(id)sender {
+    _notFoundLabel.alpha = 0;
     [_departureField resignFirstResponder];
     [_arrivalField resignFirstResponder];
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
@@ -138,23 +141,36 @@
 {
     response = [self decodeJSONString:response];
     NSString *resStr = [response componentsSeparatedByString:@"\""][1];
-    NSArray *resArray = [resStr componentsSeparatedByString:@","];
-    distance = [resArray[0] intValue];
-    routeURL = resArray[1];
-    routeArray = [resArray[2] componentsSeparatedByString:@" "];
-    NSArray *route1Array = [routeArray[0] componentsSeparatedByString:@"."];
-    NSArray *route2Array = [routeArray[1] componentsSeparatedByString:@"."];
-    NSArray *route3Array = [routeArray[2] componentsSeparatedByString:@"."];
-    _route1Time.text = [[NSString alloc] initWithFormat:@"%@  →  %@", route1Array[0], route1Array[1]];
-    _route2Time.text = [[NSString alloc] initWithFormat:@"%@  →  %@", route2Array[0], route2Array[1]];
-    _route3Time.text = [[NSString alloc] initWithFormat:@"%@  →  %@", route3Array[0], route3Array[1]];
-    _route1Detail.text = [[NSString alloc] initWithFormat:@"%@ (片道 : %@円)", route1Array[3], route1Array[2]];
-    _route2Detail.text = [[NSString alloc] initWithFormat:@"%@ (片道 : %@円)", route2Array[3], route2Array[2]];
-    _route3Detail.text = [[NSString alloc] initWithFormat:@"%@ (片道 : %@円)", route3Array[3], route3Array[2]];
-    
-    _route1Button.alpha = 1;
-    _route2Button.alpha = 1;
-    _route3Button.alpha = 1;
+    NSRange err = [[response componentsSeparatedByString:@"\""][0] rangeOfString:@"error"];
+    if(err.location == NSNotFound){
+        NSArray *resArray = [resStr componentsSeparatedByString:@","];
+        distance = [resArray[0] intValue];
+        routeURL = resArray[1];
+        routeArray = [resArray[2] componentsSeparatedByString:@" "];
+        NSArray *route1Array = [routeArray[0] componentsSeparatedByString:@"."];
+        NSArray *route2Array = [routeArray[1] componentsSeparatedByString:@"."];
+        NSArray *route3Array = [routeArray[2] componentsSeparatedByString:@"."];
+        _route1Time.text = [[NSString alloc] initWithFormat:@"%@  →  %@", route1Array[0], route1Array[1]];
+        _route2Time.text = [[NSString alloc] initWithFormat:@"%@  →  %@", route2Array[0], route2Array[1]];
+        _route3Time.text = [[NSString alloc] initWithFormat:@"%@  →  %@", route3Array[0], route3Array[1]];
+        _route1Detail.text = [[NSString alloc] initWithFormat:@"%@ (片道 : %@円)", route1Array[3], route1Array[2]];
+        _route2Detail.text = [[NSString alloc] initWithFormat:@"%@ (片道 : %@円)", route2Array[3], route2Array[2]];
+        _route3Detail.text = [[NSString alloc] initWithFormat:@"%@ (片道 : %@円)", route3Array[3], route3Array[2]];
+        _route1Button.alpha = 1;
+        _route2Button.alpha = 1;
+        _route3Button.alpha = 1;
+    } else {
+        _notFoundLabel.alpha = 1;
+        _route1Time.text = @"";
+        _route2Time.text = @"";
+        _route3Time.text = @"";
+        _route1Detail.text = @"";
+        _route2Detail.text = @"";
+        _route3Detail.text = @"";
+        _route1Button.alpha = 0;
+        _route2Button.alpha = 0;
+        _route3Button.alpha = 0;
+    }
     [SVProgressHUD dismiss];
 }
 
