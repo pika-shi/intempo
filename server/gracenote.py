@@ -23,6 +23,8 @@ def application(environ, start_response):
     metadata = pygn.search(clientID=clientID, userID=userID, artist=param_dict['artist'].decode('utf-8'), track=param_dict['track'].decode('utf-8'))
     ret_dict['title'] = metadata['track_title']
     ret_dict['jacket'] = metadata['album_art_url']
+    ret_dict['artist'] = metadata['album_artist_name']
+    ret_dict['artist_art'] = metadata['artist_image_url']
     ret_dict['tempo'] = metadata['tempo']['3']['TEXT'][:-1]
     ret_dict['mood'] = metadata['mood']['1']['TEXT'][:-1]
   except:
