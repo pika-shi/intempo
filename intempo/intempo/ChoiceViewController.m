@@ -124,7 +124,7 @@
     _notFoundLabel.alpha = 0;
     [_departureField resignFirstResponder];
     [_arrivalField resignFirstResponder];
-    if (![_departureField.text length] && ![_arrivalField.text length]) {
+    if ([_departureField.text length] && [_arrivalField.text length]) {
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
         NSString *URL = [[NSString alloc] initWithFormat:
                          @"http://pikashi.tokyo/intempo/getdata?lat=%f&lon=%f&departure_station=%@&arrival_station=%@",
