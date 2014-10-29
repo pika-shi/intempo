@@ -64,6 +64,7 @@
     [self.view addSubview:tempoAnimationBar];
     formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"HH:mm";
+    [self setChoiceButtonText:@"ROUTING   SET"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,6 +77,15 @@
     [super viewWillDisappear:animated];
     [timer invalidate];
     timer = nil;
+}
+
+-(void)setChoiceButtonText:(NSString *)text
+{
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
+    [attributedText addAttribute:NSKernAttributeName
+                           value:[NSNumber numberWithFloat:1.5f]
+                           range:NSMakeRange(0, attributedText.length)];
+    [_choiceButton setAttributedTitle:attributedText forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -104,7 +114,7 @@
         _artistNameLabel.alpha = 0;
         _albumNameLabel.alpha = 0;
         _musicListButton.alpha = 1;
-        [_choiceButton setTitle:@"ROUTING SET" forState:UIControlStateNormal];
+        [self setChoiceButtonText:@"ROUTING   SET"];
         _backgroundView.image = [UIImage imageNamed:@"bg1.png"];
     } else {
         _detailLabel.alpha = 1;
@@ -129,7 +139,7 @@
         _artistNameLabel.alpha = 1;
         _albumNameLabel.alpha = 1;
         _musicListButton.alpha = 0;
-        [_choiceButton setTitle:@"" forState:UIControlStateNormal];
+        [self setChoiceButtonText:@""];
         _backgroundView.image = [UIImage imageNamed:@"bg2.png"];
         _tempoLabel.text = _tempo;
         current = [NSDate date];
@@ -272,7 +282,13 @@
     _jacketView.alpha = 0;
     _musicButton.alpha = 0;
     _titleLabel.alpha = 1;
-    [_choiceButton setTitle:@"ROUTING SET" forState:UIControlStateNormal];
+    _tempoBar.alpha = 0;
+    _tempoGradBar.alpha = 1;
+    _artistImage.alpha = 0;
+    _artistNameLabel.alpha = 0;
+    _albumNameLabel.alpha = 0;
+    _musicListButton.alpha = 1;
+    [self setChoiceButtonText:@"ROUTING   SET"];
     _backgroundView.image = [UIImage imageNamed:@"bg1.png"];
     _tempo = 0;
 }

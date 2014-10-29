@@ -41,6 +41,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *route2Detail;
 @property (weak, nonatomic) IBOutlet UILabel *route3Detail;
 @property (weak, nonatomic) IBOutlet UILabel *notFoundLabel;
+@property (weak, nonatomic) IBOutlet UILabel *route1Dot;
+@property (weak, nonatomic) IBOutlet UILabel *route2Dot;
+@property (weak, nonatomic) IBOutlet UILabel *route3Dot;
 @end
 
 @implementation ChoiceViewController
@@ -56,7 +59,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // ProgresBar
-    [[SVProgressHUD appearance] setHudBackgroundColor:[UIColor colorWithRed:11.0/255.0 green:80.0/255.0 blue:116.0/255.0 alpha:1.0]];
+    [[SVProgressHUD appearance] setHudBackgroundColor:[UIColor colorWithRed:40.0/255.0 green:40.0/255.0 blue:40.0/255.0 alpha:1.0]];
     [[SVProgressHUD appearance] setHudForegroundColor:[UIColor whiteColor]];
     
     // GPS
@@ -79,6 +82,10 @@
     _route1Button.alpha = 0;
     _route2Button.alpha = 0;
     _route3Button.alpha = 0;
+    
+    _route1Dot.alpha = 0;
+    _route2Dot.alpha = 0;
+    _route3Dot.alpha = 0;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -161,6 +168,9 @@
         _route1Button.alpha = 1;
         _route2Button.alpha = 1;
         _route3Button.alpha = 1;
+        _route1Dot.alpha = 1;
+        _route2Dot.alpha = 1;
+        _route3Dot.alpha = 1;
     } else {
         _notFoundLabel.alpha = 1;
         _route1Time.text = @"";
