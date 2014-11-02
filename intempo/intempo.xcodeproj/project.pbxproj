@@ -52,6 +52,8 @@
 		72C6A50919FD5217006C154F /* icon_download.png in Resources */ = {isa = PBXBuildFile; fileRef = 72C6A50719FD5217006C154F /* icon_download.png */; };
 		72C6A50A19FD5217006C154F /* icon_music_List.png in Resources */ = {isa = PBXBuildFile; fileRef = 72C6A50819FD5217006C154F /* icon_music_List.png */; };
 		72F1168F1A06727100297F7B /* icon_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 72F1168E1A06727100297F7B /* icon_back.png */; };
+		72F116911A06952300297F7B /* music_list.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 72F116901A06952300297F7B /* music_list.jpg */; };
+		72F116941A06970B00297F7B /* MusicListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F116931A06970B00297F7B /* MusicListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +122,9 @@
 		72C6A50719FD5217006C154F /* icon_download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_download.png; sourceTree = "<group>"; };
 		72C6A50819FD5217006C154F /* icon_music_List.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_music_List.png; sourceTree = "<group>"; };
 		72F1168E1A06727100297F7B /* icon_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_back.png; sourceTree = "<group>"; };
+		72F116901A06952300297F7B /* music_list.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = music_list.jpg; sourceTree = "<group>"; };
+		72F116921A06970B00297F7B /* MusicListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicListViewController.h; sourceTree = "<group>"; };
+		72F116931A06970B00297F7B /* MusicListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicListViewController.m; sourceTree = "<group>"; };
 		F9CFA9CC102607F8804FBCA4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +180,8 @@
 				7238B79419F26B03009EB03B /* ChoiceViewController.m */,
 				7238B79619F26B46009EB03B /* WebViewController.h */,
 				7238B79719F26B46009EB03B /* WebViewController.m */,
+				72F116921A06970B00297F7B /* MusicListViewController.h */,
+				72F116931A06970B00297F7B /* MusicListViewController.m */,
 				720349A919EA893D00D1E825 /* Main.storyboard */,
 				720349AC19EA893D00D1E825 /* Images.xcassets */,
 				720349AE19EA893D00D1E825 /* LaunchScreen.xib */,
@@ -215,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				72F1168E1A06727100297F7B /* icon_back.png */,
+				72F116901A06952300297F7B /* music_list.jpg */,
 				72C6A50719FD5217006C154F /* icon_download.png */,
 				72C6A50819FD5217006C154F /* icon_music_List.png */,
 				720C138B19FB4B9E007390BC /* btn_finish.png */,
@@ -391,6 +399,7 @@
 				720349AB19EA893D00D1E825 /* Main.storyboard in Resources */,
 				7274161219F813FC009B5E06 /* 90.jpg in Resources */,
 				7274161119F813FC009B5E06 /* 80.jpg in Resources */,
+				72F116911A06952300297F7B /* music_list.jpg in Resources */,
 				72F1168F1A06727100297F7B /* icon_back.png in Resources */,
 				72C6A50A19FD5217006C154F /* icon_music_List.png in Resources */,
 				720C139719FB4B9E007390BC /* icon_stop.png in Resources */,
@@ -459,6 +468,7 @@
 				72B3FDFC19EA8AF9001BF293 /* NetworkManager.m in Sources */,
 				7238B79819F26B46009EB03B /* WebViewController.m in Sources */,
 				720349A819EA893D00D1E825 /* TopViewController.m in Sources */,
+				72F116941A06970B00297F7B /* MusicListViewController.m in Sources */,
 				720349A519EA893D00D1E825 /* AppDelegate.m in Sources */,
 				7238B79519F26B03009EB03B /* ChoiceViewController.m in Sources */,
 				720349A219EA893D00D1E825 /* main.m in Sources */,

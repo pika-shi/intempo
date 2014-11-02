@@ -180,12 +180,18 @@
                                     <rect key="frame" x="13" y="187" width="50" height="50"/>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_music_List.png" translatesAutoresizingMaskIntoConstraints="NO" id="qEr-zb-HLU">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6y-pd-Kdy">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Button" image="icon_music_List.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <variation key="heightClass=regular" fixedFrame="YES">
                                     <rect key="frame" x="13" y="25" width="30" height="30"/>
                                 </variation>
-                            </imageView>
+                                <connections>
+                                    <segue destination="G9Y-lN-cZS" kind="presentation" id="OaK-sc-584"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNt-rS-1Ka">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="25"/>
@@ -340,7 +346,7 @@
                                 <exclude reference="awN-iH-aQd"/>
                                 <exclude reference="h76-DC-DfI"/>
                                 <exclude reference="RRn-6g-cMa"/>
-                                <exclude reference="qEr-zb-HLU"/>
+                                <exclude reference="i6y-pd-Kdy"/>
                                 <exclude reference="YNt-rS-1Ka"/>
                                 <exclude reference="SsQ-Ed-npU"/>
                                 <exclude reference="gCj-xV-FDe"/>
@@ -369,7 +375,7 @@
                                 <include reference="awN-iH-aQd"/>
                                 <include reference="h76-DC-DfI"/>
                                 <include reference="RRn-6g-cMa"/>
-                                <include reference="qEr-zb-HLU"/>
+                                <include reference="i6y-pd-Kdy"/>
                                 <include reference="YNt-rS-1Ka"/>
                                 <include reference="SsQ-Ed-npU"/>
                                 <include reference="gCj-xV-FDe"/>
@@ -409,7 +415,6 @@
                         <outlet property="hereLabel" destination="aWk-Jv-jMx" id="CKs-0r-rmw"/>
                         <outlet property="jacketView" destination="1TF-4h-Bxx" id="Vwb-gr-Afb"/>
                         <outlet property="musicButton" destination="gCj-xV-FDe" id="NDk-vd-AIw"/>
-                        <outlet property="musicListButton" destination="qEr-zb-HLU" id="RWp-mX-bQ2"/>
                         <outlet property="playButton" destination="yZR-Jg-B64" id="hmY-Mg-33n"/>
                         <outlet property="restLabel" destination="vDA-kt-iml" id="xE7-Jl-dgT"/>
                         <outlet property="stopView" destination="gik-lD-eAH" id="EzB-sf-bf4"/>
@@ -426,6 +431,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-636" y="-47.25"/>
+        </scene>
+        <!--Music List View Controller-->
+        <scene sceneID="sS5-GT-1z0">
+            <objects>
+                <viewController id="G9Y-lN-cZS" customClass="MusicListViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GUk-oX-qEJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="fke-EI-8Ab"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CbF-Iv-FlT">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music_list.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="xQH-pM-mbx">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_disclose.png" translatesAutoresizingMaskIntoConstraints="NO" id="B0j-DN-KFM">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="27" width="16" height="16"/>
+                                </variation>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdC-pR-pHx">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="12" y="19" width="32" height="32"/>
+                                </variation>
+                                <connections>
+                                    <action selector="closeButton:" destination="G9Y-lN-cZS" eventType="touchUpInside" id="9cq-sN-TLn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="xQH-pM-mbx"/>
+                                <exclude reference="B0j-DN-KFM"/>
+                                <exclude reference="fdC-pR-pHx"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="subviews">
+                                <include reference="xQH-pM-mbx"/>
+                                <include reference="B0j-DN-KFM"/>
+                                <include reference="fdC-pR-pHx"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gxl-Wg-rxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-636" y="450.75"/>
         </scene>
         <!--Choice View Controller-->
         <scene sceneID="Faa-c9-sHI">
@@ -581,7 +645,7 @@
                                             <rect key="frame" x="37" y="530" width="300" height="31"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_back.png" translatesAutoresizingMaskIntoConstraints="NO" id="dfx-Wh-FV6">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="B42153E6-A3BD-4118-B8D9-0BACBC540EA8" translatesAutoresizingMaskIntoConstraints="NO" id="dfx-Wh-FV6">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <variation key="heightClass=regular" fixedFrame="YES">
                                             <rect key="frame" x="20" y="25" width="14" height="22"/>
@@ -787,15 +851,136 @@
         </scene>
     </scenes>
     <resources>
+        <image name="B42153E6-A3BD-4118-B8D9-0BACBC540EA8" width="21" height="36">
+            <mutableData key="keyedArchiveRepresentation">
+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
+AgQAAAAUclhZWgAAAhgAAAAUZ1hZWgAAAiwAAAAUYlhZWgAAAkAAAAAUZG1uZAAAAlQAAABwZG1kZAAA
+AsQAAACIdnVlZAAAA0wAAACGdmlldwAAA9QAAAAkbHVtaQAAA/gAAAAUbWVhcwAABAwAAAAkdGVjaAAA
+BDAAAAAMclRSQwAABDwAAAgMZ1RSQwAABDwAAAgMYlRSQwAABDwAAAgMdGV4dAAAAABDb3B5cmlnaHQg
+KGMpIDE5OTggSGV3bGV0dC1QYWNrYXJkIENvbXBhbnkAAGRlc2MAAAAAAAAAEnNSR0IgSUVDNjE5NjYt
+Mi4xAAAAAAAAAAAAAAASc1JHQiBJRUM2MTk2Ni0yLjEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAAAAAAAADzUQABAAAAARbMWFlaIAAAAAAAAAAAAAAAAAAA
+AABYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAA
+ts9kZXNjAAAAAAAAABZJRUMgaHR0cDovL3d3dy5pZWMuY2gAAAAAAAAAAAAAABZJRUMgaHR0cDovL3d3
+dy5pZWMuY2gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZGVzYwAA
+AAAAAAAuSUVDIDYxOTY2LTIuMSBEZWZhdWx0IFJHQiBjb2xvdXIgc3BhY2UgLSBzUkdCAAAAAAAAAAAA
+AAAuSUVDIDYxOTY2LTIuMSBEZWZhdWx0IFJHQiBjb2xvdXIgc3BhY2UgLSBzUkdCAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAGRlc2MAAAAAAAAALFJlZmVyZW5jZSBWaWV3aW5nIENvbmRpdGlvbiBpbiBJRUM2MTk2
+Ni0yLjEAAAAAAAAAAAAAACxSZWZlcmVuY2UgVmlld2luZyBDb25kaXRpb24gaW4gSUVDNjE5NjYtMi4x
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB2aWV3AAAAAAATpP4AFF8uABDPFAAD7cwABBMLAANcngAA
+AAFYWVogAAAAAABMCVYAUAAAAFcf521lYXMAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAKPAAAAAnNp
+ZyAAAAAAQ1JUIGN1cnYAAAAAAAAEAAAAAAUACgAPABQAGQAeACMAKAAtADIANwA7AEAARQBKAE8AVABZ
+AF4AYwBoAG0AcgB3AHwAgQCGAIsAkACVAJoAnwCkAKkArgCyALcAvADBAMYAywDQANUA2wDgAOUA6wDw
+APYA+wEBAQcBDQETARkBHwElASsBMgE4AT4BRQFMAVIBWQFgAWcBbgF1AXwBgwGLAZIBmgGhAakBsQG5
+AcEByQHRAdkB4QHpAfIB+gIDAgwCFAIdAiYCLwI4AkECSwJUAl0CZwJxAnoChAKOApgCogKsArYCwQLL
+AtUC4ALrAvUDAAMLAxYDIQMtAzgDQwNPA1oDZgNyA34DigOWA6IDrgO6A8cD0wPgA+wD+QQGBBMEIAQt
+BDsESARVBGMEcQR+BIwEmgSoBLYExATTBOEE8AT+BQ0FHAUrBToFSQVYBWcFdwWGBZYFpgW1BcUF1QXl
+BfYGBgYWBicGNwZIBlkGagZ7BowGnQavBsAG0QbjBvUHBwcZBysHPQdPB2EHdAeGB5kHrAe/B9IH5Qf4
+CAsIHwgyCEYIWghuCIIIlgiqCL4I0gjnCPsJEAklCToJTwlkCXkJjwmkCboJzwnlCfsKEQonCj0KVApq
+CoEKmAquCsUK3ArzCwsLIgs5C1ELaQuAC5gLsAvIC+EL+QwSDCoMQwxcDHUMjgynDMAM2QzzDQ0NJg1A
+DVoNdA2ODakNww3eDfgOEw4uDkkOZA5/DpsOtg7SDu4PCQ8lD0EPXg96D5YPsw/PD+wQCRAmEEMQYRB+
+EJsQuRDXEPURExExEU8RbRGMEaoRyRHoEgcSJhJFEmQShBKjEsMS4xMDEyMTQxNjE4MTpBPFE+UUBhQn
+FEkUahSLFK0UzhTwFRIVNBVWFXgVmxW9FeAWAxYmFkkWbBaPFrIW1hb6Fx0XQRdlF4kXrhfSF/cYGxhA
+GGUYihivGNUY+hkgGUUZaxmRGbcZ3RoEGioaURp3Gp4axRrsGxQbOxtjG4obshvaHAIcKhxSHHscoxzM
+HPUdHh1HHXAdmR3DHeweFh5AHmoelB6+HukfEx8+H2kflB+/H+ogFSBBIGwgmCDEIPAhHCFIIXUhoSHO
+IfsiJyJVIoIiryLdIwojOCNmI5QjwiPwJB8kTSR8JKsk2iUJJTglaCWXJccl9yYnJlcmhya3JugnGCdJ
+J3onqyfcKA0oPyhxKKIo1CkGKTgpaymdKdAqAio1KmgqmyrPKwIrNitpK50r0SwFLDksbiyiLNctDC1B
+LXYtqy3hLhYuTC6CLrcu7i8kL1ovkS/HL/4wNTBsMKQw2zESMUoxgjG6MfIyKjJjMpsy1DMNM0YzfzO4
+M/E0KzRlNJ402DUTNU01hzXCNf02NzZyNq426TckN2A3nDfXOBQ4UDiMOMg5BTlCOX85vDn5OjY6dDqy
+Ou87LTtrO6o76DwnPGU8pDzjPSI9YT2hPeA+ID5gPqA+4D8hP2E/oj/iQCNAZECmQOdBKUFqQaxB7kIw
+QnJCtUL3QzpDfUPARANER0SKRM5FEkVVRZpF3kYiRmdGq0bwRzVHe0fASAVIS0iRSNdJHUljSalJ8Eo3
+Sn1KxEsMS1NLmkviTCpMcky6TQJNSk2TTdxOJU5uTrdPAE9JT5NP3VAnUHFQu1EGUVBRm1HmUjFSfFLH
+UxNTX1OqU/ZUQlSPVNtVKFV1VcJWD1ZcVqlW91dEV5JX4FgvWH1Yy1kaWWlZuFoHWlZaplr1W0VblVvl
+XDVchlzWXSddeF3JXhpebF69Xw9fYV+zYAVgV2CqYPxhT2GiYfViSWKcYvBjQ2OXY+tkQGSUZOllPWWS
+ZedmPWaSZuhnPWeTZ+loP2iWaOxpQ2maafFqSGqfavdrT2una/9sV2yvbQhtYG25bhJua27Ebx5veG/R
+cCtwhnDgcTpxlXHwcktypnMBc11zuHQUdHB0zHUodYV14XY+dpt2+HdWd7N4EXhueMx5KnmJeed6Rnql
+ewR7Y3vCfCF8gXzhfUF9oX4BfmJ+wn8jf4R/5YBHgKiBCoFrgc2CMIKSgvSDV4O6hB2EgITjhUeFq4YO
+hnKG14c7h5+IBIhpiM6JM4mZif6KZIrKizCLlov8jGOMyo0xjZiN/45mjs6PNo+ekAaQbpDWkT+RqJIR
+knqS45NNk7aUIJSKlPSVX5XJljSWn5cKl3WX4JhMmLiZJJmQmfyaaJrVm0Kbr5wcnImc951kndKeQJ6u
+nx2fi5/6oGmg2KFHobaiJqKWowajdqPmpFakx6U4pammGqaLpv2nbqfgqFKoxKk3qamqHKqPqwKrdavp
+rFys0K1ErbiuLa6hrxavi7AAsHWw6rFgsdayS7LCszizrrQltJy1E7WKtgG2ebbwt2i34LhZuNG5SrnC
+uju6tbsuu6e8IbybvRW9j74KvoS+/796v/XAcMDswWfB48JfwtvDWMPUxFHEzsVLxcjGRsbDx0HHv8g9
+yLzJOsm5yjjKt8s2y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc
+1+DYZNjo2WzZ8dp22vvbgNwF3IrdEN2W3hzeot8p36/gNuC94UThzOJT4tvjY+Pr5HPk/OWE5g3mlucf
+56noMui86Ubp0Opb6uXrcOv77IbtEe2c7ijutO9A78zwWPDl8XLx//KM8xnzp/Q09ML1UPXe9m32+/eK
++Bn4qPk4+cf6V/rn+3f8B/yY/Sn9uv5L/tz/bf//0iIjJCVaJGNsYXNzbmFtZVgkY2xhc3Nlc18QEE5T
+Qml0bWFwSW1hZ2VSZXCjJicoXxAQTlNCaXRtYXBJbWFnZVJlcFpOU0ltYWdlUmVwWE5TT2JqZWN00iIj
+KitXTlNBcnJheaIqKNIiIy0uXk5TTXV0YWJsZUFycmF5oy0qKNMwMQkyMzRXTlNXaGl0ZVxOU0NvbG9y
+U3BhY2VEMCAwABADgAvSIiM2N1dOU0NvbG9yojYo0iIjOTpXTlNJbWFnZaI5KF8QD05TS2V5ZWRBcmNo
+aXZlctE9PlRyb290gAEACAARABoAIwAtADIANwBFAEsAVABbAGgAbwB3AHkAfgCAAIIAhwCSAJQAlgCY
+AJ0AoACiAKQApgCoAK0AxADGAMgZqhmvGboZwxnWGdoZ7Rn4GgEaBhoOGhEaFholGikaMBo4GkUaShpM
+Gk4aUxpbGl4aYxprGm4agBqDGogAAAAAAAACAQAAAAAAAAA/AAAAAAAAAAAAAAAAAAAaig
+</mutableData>
+        </image>
         <image name="bg1.png" width="640" height="1136"/>
         <image name="btn_finish.png" width="264" height="84"/>
-        <image name="icon_back.png" width="21" height="36"/>
+        <image name="icon_disclose.png" width="32" height="31"/>
         <image name="icon_here.png" width="19" height="24"/>
         <image name="icon_music_List.png" width="62" height="62"/>
         <image name="icon_root.png" width="34" height="32"/>
         <image name="icon_start.png" width="180" height="180"/>
         <image name="icon_tempo_full.png" width="155" height="60"/>
         <image name="icon_there.png" width="25" height="24"/>
+        <image name="music_list.jpg" width="540" height="960"/>
         <image name="tempobar.png" width="640" height="10"/>
         <image name="textfield.png" width="560" height="100"/>
     </resources>

@@ -223,9 +223,10 @@
     topViewController.departureTime = departure;
     topViewController.departureStation = departureStation;
     topViewController.play = @"Y";
-    [self.navigationController popToRootViewControllerAnimated:YES];
     [SVProgressHUD dismiss];
     [timer invalidate];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)route1Button:(id)sender {
@@ -258,5 +259,6 @@
     topViewController = [arrayForNavigationViewControllers objectAtIndex:0];
     [self.navigationController popToRootViewControllerAnimated:YES];
     [SVProgressHUD dismiss];
+    //[self dismissViewControllerAnimated:YES completion:nil];
 }
 @end
