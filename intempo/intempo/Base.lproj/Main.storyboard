@@ -581,10 +581,10 @@
                                             <rect key="frame" x="37" y="530" width="300" height="31"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_disclose.png" translatesAutoresizingMaskIntoConstraints="NO" id="dfx-Wh-FV6">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_back.png" translatesAutoresizingMaskIntoConstraints="NO" id="dfx-Wh-FV6">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <variation key="heightClass=regular" fixedFrame="YES">
-                                            <rect key="frame" x="20" y="27" width="16" height="16"/>
+                                            <rect key="frame" x="20" y="25" width="14" height="22"/>
                                         </variation>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FU6-iF-z07">
@@ -789,7 +789,7 @@
     <resources>
         <image name="bg1.png" width="640" height="1136"/>
         <image name="btn_finish.png" width="264" height="84"/>
-        <image name="icon_disclose.png" width="32" height="31"/>
+        <image name="icon_back.png" width="21" height="36"/>
         <image name="icon_here.png" width="19" height="24"/>
         <image name="icon_music_List.png" width="62" height="62"/>
         <image name="icon_root.png" width="34" height="32"/>

@@ -51,6 +51,7 @@
 		72C6A50619FD462B006C154F /* 170.png in Resources */ = {isa = PBXBuildFile; fileRef = 72C6A50119FD462B006C154F /* 170.png */; };
 		72C6A50919FD5217006C154F /* icon_download.png in Resources */ = {isa = PBXBuildFile; fileRef = 72C6A50719FD5217006C154F /* icon_download.png */; };
 		72C6A50A19FD5217006C154F /* icon_music_List.png in Resources */ = {isa = PBXBuildFile; fileRef = 72C6A50819FD5217006C154F /* icon_music_List.png */; };
+		72F1168F1A06727100297F7B /* icon_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 72F1168E1A06727100297F7B /* icon_back.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		72C6A50119FD462B006C154F /* 170.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 170.png; sourceTree = "<group>"; };
 		72C6A50719FD5217006C154F /* icon_download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_download.png; sourceTree = "<group>"; };
 		72C6A50819FD5217006C154F /* icon_music_List.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_music_List.png; sourceTree = "<group>"; };
+		72F1168E1A06727100297F7B /* icon_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_back.png; sourceTree = "<group>"; };
 		F9CFA9CC102607F8804FBCA4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,6 +214,7 @@
 		727415E219F7DAEC009B5E06 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				72F1168E1A06727100297F7B /* icon_back.png */,
 				72C6A50719FD5217006C154F /* icon_download.png */,
 				72C6A50819FD5217006C154F /* icon_music_List.png */,
 				720C138B19FB4B9E007390BC /* btn_finish.png */,
@@ -388,6 +391,7 @@
 				720349AB19EA893D00D1E825 /* Main.storyboard in Resources */,
 				7274161219F813FC009B5E06 /* 90.jpg in Resources */,
 				7274161119F813FC009B5E06 /* 80.jpg in Resources */,
+				72F1168F1A06727100297F7B /* icon_back.png in Resources */,
 				72C6A50A19FD5217006C154F /* icon_music_List.png in Resources */,
 				720C139719FB4B9E007390BC /* icon_stop.png in Resources */,
 				720C139519FB4B9E007390BC /* icon_list.png in Resources */,

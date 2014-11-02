@@ -59,7 +59,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // ProgresBar
-    [[SVProgressHUD appearance] setHudBackgroundColor:[UIColor colorWithRed:40.0/255.0 green:40.0/255.0 blue:40.0/255.0 alpha:1.0]];
+    [[SVProgressHUD appearance] setHudBackgroundColor:[UIColor colorWithRed:36.0/255.0 green:36.0/255.0 blue:36.0/255.0 alpha:1.0]];
     [[SVProgressHUD appearance] setHudForegroundColor:[UIColor whiteColor]];
     
     // GPS
