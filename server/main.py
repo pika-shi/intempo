@@ -29,7 +29,7 @@ def application(environ, start_response):
     return json.dumps({'error':'google api json parse error'})
   ret_list.append(distance)
 
-  departure_time = get_departure_time(distance)
+  departure_time = param_dict['time'] if 'time' in param_dict else get_departure_time(distance)
 
   route_url = get_route_url(param_dict['departure_station'],
           param_dict['arrival_station'], departure_time)
