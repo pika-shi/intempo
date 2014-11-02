@@ -134,7 +134,7 @@
     if ([_departureField.text length] && [_arrivalField.text length]) {
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
         NSString *URL = [[NSString alloc] initWithFormat:
-                         @"http://pikashi.tokyo/intempo/getdata?lat=%f&lon=%f&departure_station=%@&arrival_station=%@",
+                         @"http://pikashi.tokyo/intempo/getdata?lat=%f&lon=%f&departure_station=%@&arrival_station=%@&time=1225",
                          lat, lon, _departureField.text, _arrivalField.text];
         URL = [URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [manager GET:URL parameters:nil success:^(NSURLSessionDataTask *task, NSString *response) {
@@ -204,10 +204,9 @@
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm"];
-    NSDate *current = [NSDate date];
     NSString *currentString = [dateFormatter stringFromDate:[NSDate date]];
     NSDate *departureDate = [dateFormatter dateFromString: [[NSString alloc] initWithFormat:@"%@/%@/%@ %@", [currentString substringToIndex:4], [currentString substringWithRange:NSMakeRange(5, 2)],[currentString substringWithRange:NSMakeRange(8, 2)], departureTime]];
-    NSTimeInterval interval = [departureDate timeIntervalSinceDate:current];
+    NSTimeInterval interval = [departureDate timeIntervalSinceDate:[dateFormatter dateFromString: [[NSString alloc] initWithFormat:@"%@/%@/%@ %@", [currentString substringToIndex:4], [currentString substringWithRange:NSMakeRange(5, 2)],[currentString substringWithRange:NSMakeRange(8, 2)], @"12:20"]]];
     NSInteger delta = round(interval);
     NSInteger tempo = (distance * 6000) / (step * delta);
     return round(tempo/10)*10;

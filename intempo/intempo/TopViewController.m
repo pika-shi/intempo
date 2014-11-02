@@ -142,9 +142,6 @@
         [self setChoiceButtonText:@""];
         _backgroundView.image = [UIImage imageNamed:@"bg2.png"];
         _tempoLabel.text = _tempo;
-        current = [NSDate date];
-        currentStr = [formatter stringFromDate:current];
-        _currentLabel.text = currentStr;
         _departureLabel.text = _departureTime;
         _thereLabel.text = [[NSString alloc] initWithFormat:@"%@駅", _departureStation];
         NSString* bpm = [self getMusic:[_tempo intValue]];
@@ -172,18 +169,7 @@
         tempoAnimationBar.frame = CGRectMake(320, 0, 320, 5);
         [UIView commitAnimations];
         
-        timer = [NSTimer scheduledTimerWithTimeInterval:(1.0)
-                                                 target:self
-                                               selector:@selector(onTimer:)
-                                               userInfo:nil
-                                                repeats:YES];
     }
-}
-
--(void)onTimer:(NSTimer*)timer {
-    current = [NSDate date];
-    currentStr = [formatter stringFromDate:current];
-    _currentLabel.text = currentStr;
 }
 
 -(NSString *)getMusic:(NSInteger)tempo
